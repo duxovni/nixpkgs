@@ -35,6 +35,9 @@ in mkYarnPackage rec {
 
   nativeBuildInputs = [ makeWrapper ];
 
+  seshat = callPackage ./seshat {};
+  keytar = callPackage ./keytar {};
+
   buildPhase = ''
     runHook preBuild
     export HOME=$(mktemp -d)
@@ -43,6 +46,9 @@ in mkYarnPackage rec {
     yarn run i18n
     node ./scripts/copy-res.js
     popd
+    rm -rf node_modules/matrix-seshat node_modules/keytar
+    ln -s $keytar node_modules/keytar
+    ln -s $seshat node_modules/matrix-seshat
     runHook postBuild
   '';
 
