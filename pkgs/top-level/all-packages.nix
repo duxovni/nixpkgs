@@ -22172,6 +22172,7 @@ with pkgs;
 
   libbluray = callPackage ../development/libraries/libbluray {
     inherit (darwin.apple_sdk.frameworks) DiskArbitration;
+    jdk = jdk19;
   };
 
   libbs2b = callPackage ../development/libraries/audio/libbs2b { };
